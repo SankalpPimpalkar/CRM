@@ -123,7 +123,7 @@ class ApprwiteService {
         }
     }
 
-    async updateDetails({ name, email, avatar, phone }: UpdateUserParams){
+    async updateDetails({ name, email, avatar, phone }: UpdateUserParams) {
         try {
             const userAuth = await this.account.get();
 
@@ -135,7 +135,7 @@ class ApprwiteService {
             if (name) updatedData.name = name
             if (email) updatedData.name = email
             if (phone) updatedData.name = phone
-            
+
 
             if (avatar) {
                 const response = await this.uploadAvatar(userAuth.$id, avatar)
@@ -167,7 +167,7 @@ class ApprwiteService {
         }
     }
 
-    async uploadAvatar(fileId:string, file: File) {
+    async uploadAvatar(fileId: string, file: File) {
         const avatarFile = await this.storage.createFile(
             appwriteConfig.avatarsBucketId,
             fileId,
@@ -177,7 +177,7 @@ class ApprwiteService {
         return avatarFile
     }
 
-    async validateNewUsername(username:string):Promise<boolean | undefined> {
+    async validateNewUsername(username: string): Promise<boolean | undefined> {
         try {
 
             const formattedUsername = username.trim().split(' ').join('').toLowerCase()
@@ -199,6 +199,10 @@ class ApprwiteService {
             )
         }
     }
+
+
+    // Database
+
 }
 
 const apprwiteService = new ApprwiteService();

@@ -8,8 +8,12 @@ import InteractionComponent from './InteractionComponent';
 export function ToggleContentCard({ deals, interactions }: { deals: any[], interactions: any[] }) {
     const [activeTab, setActiveTab] = useState<'deals' | 'interactions'>('deals');
 
+    const sortedDeals = [...deals].sort((a, b) => new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime());
+    const sortedInteractions = [...interactions].sort((a, b) => new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime());
+
     return (
         <div className="rounded-lg w-full">
+            {/* Tabs */}
             <div className="flex mb-4 gap-4">
                 <button
                     className={`flex items-center justify-center cursor-pointer flex-1 py-3 font-semibold text-lg rounded-md transition-colors ${activeTab === 'deals' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:bg-gray-50'}`}
@@ -26,16 +30,17 @@ export function ToggleContentCard({ deals, interactions }: { deals: any[], inter
                 </button>
             </div>
 
+            {/* Content */}
             <div className="py-2">
                 {activeTab === 'deals' ? (
                     <div className="divide-y divide-gray-300 border-t border-gray-300">
-                        {deals.map((deal) => (
+                        {sortedDeals.map((deal) => (
                             <DealComponent deal={deal} key={deal.$id} />
                         ))}
                     </div>
                 ) : (
                     <div className="divide-y divide-gray-300 border-t border-gray-300">
-                        {interactions.map((interaction) => (
+                        {sortedInteractions.map((interaction) => (
                             <InteractionComponent interaction={interaction} key={interaction.$id} />
                         ))}
                     </div>

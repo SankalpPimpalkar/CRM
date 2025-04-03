@@ -10,7 +10,7 @@ export default function SettingsPage() {
 
     return (
         <div className='px-5 space-y-6'>
-            <div className='flex items-center justify-between border-b border-gray-200 pb-5'>
+            <div className='flex items-center justify-between border-b border-gray-200 py-5'>
                 <h1 className='text-3xl font-bold text-gray-800'>
                     Settings
                 </h1>
@@ -18,29 +18,37 @@ export default function SettingsPage() {
 
             {/* User Profile Section */}
             <div className='bg-white overflow-hidden'>
-                <div className='p-6 flex items-center gap-6 border-b border-gray-100'>
-                    <div className='w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden'>
-                        <img src={userData.avatar || 'https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg'} alt="Profile" className="w-full h-full object-cover" />
+                <div className='p-6 flex items-center justify-between gap-6 border-b border-gray-100'>
+                    <div className='flex items-center gap-6'>
+                        <div className='w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden'>
+                            <img src={userData.avatar || 'https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg'} alt="Profile" className="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <h2 className='text-3xl font-extrabold text-gray-600 font-sans'>
+                                {userData.name}
+                            </h2>
+                            <p className='text-gray-400 font-semibold'>@{userData.username}</p>
+                        </div>
                     </div>
-                    <div>
-                        <h2 className='text-xl font-semibold text-gray-800'>{userData.name}</h2>
-                        <p className='text-gray-500'>@{userData.username}</p>
-                    </div>
+
+                    <button className='text-sm bg-gray-700 active:bg-gray-800 cursor-pointer text-gray-100 px-5 py-2 rounded-md font-semibold'>
+                        Edit Profile
+                    </button>
                 </div>
 
                 <div className='divide-y divide-gray-100'>
                     {/* Personal Information */}
                     <div className='p-6 space-y-4'>
-                        <h3 className='text-lg font-medium text-gray-800'>Personal Information</h3>
+                        <h3 className='text-lg font-semibold text-gray-800'>Personal Information</h3>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                            <div className='flex items-center gap-3'>
+                            <div className='flex items-center gap-6'>
                                 <Mail className='w-5 h-5 text-gray-400' />
                                 <div>
                                     <p className='text-sm text-gray-500'>Email</p>
                                     <p className='font-medium'>{userData.email}</p>
                                 </div>
                             </div>
-                            <div className='flex items-center gap-3'>
+                            <div className='flex items-center gap-6'>
                                 <Phone className='w-5 h-5 text-gray-400' />
                                 <div>
                                     <p className='text-sm text-gray-500'>Phone</p>
@@ -53,10 +61,10 @@ export default function SettingsPage() {
                     {/* Companies Section */}
                     {userData.companies?.length > 0 && (
                         <div className='p-6 space-y-4'>
-                            <h3 className='text-lg font-medium text-gray-800'>Your Companies</h3>
+                            <h3 className='text-lg font-semibold text-gray-800'>Your Companies</h3>
                             <div className='space-y-3'>
                                 {userData.companies.map((company: any) => (
-                                    <div key={company.$id} className='flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg'>
+                                    <div key={company.$id} className='flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg cursor-pointer'>
                                         <div className='flex-shrink-0'>
                                             <img
                                                 src={company.logo || 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'}
@@ -77,7 +85,7 @@ export default function SettingsPage() {
 
                     {/* Statistics Section */}
                     <div className='p-6 space-y-4'>
-                        <h3 className='text-lg font-medium text-gray-800'>Your Activity</h3>
+                        <h3 className='text-lg font-semibold text-gray-800'>Your Activity</h3>
                         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                             <div className='border border-gray-300 rounded-lg p-4'>
                                 <div className='flex items-center gap-3'>
@@ -106,12 +114,13 @@ export default function SettingsPage() {
             </div>
 
             {/* Account Actions */}
-            <div className='bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden'>
-                <div className='p-6 space-y-4'>
-                    <h3 className='text-lg font-medium text-gray-800'>Account</h3>
-                    <button className='w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg'>
-                        <span className='text-red-600 font-medium'>Delete Account</span>
-                        <ChevronRight className='w-5 h-5 text-gray-400' />
+            <div className='bg-red-100 rounded-lg shadow-sm border border-red-200 overflow-hidden'>
+                <div className='p-6 space-y-2'>
+                    <h3 className='text-lg font-medium text-gray-800'>
+                        Delete my Account
+                    </h3>
+                    <button className='py-3 rounded-lg text-red-600'>
+                        Delete
                     </button>
                 </div>
             </div>
